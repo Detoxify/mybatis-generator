@@ -1,0 +1,569 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pana.generator.dao.MaintainCarInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.pana.generator.entity.MaintainCarInfo" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="car_vin" property="carVin" jdbcType="VARCHAR" />
+    <result column="engine_no" property="engineNo" jdbcType="VARCHAR" />
+    <result column="brand" property="brand" jdbcType="VARCHAR" />
+    <result column="car_type" property="carType" jdbcType="VARCHAR" />
+    <result column="first_date" property="firstDate" jdbcType="VARCHAR" />
+    <result column="odometer_count" property="odometerCount" jdbcType="INTEGER" />
+    <result column="report_time" property="reportTime" jdbcType="VARCHAR" />
+    <result column="driving_url" property="drivingUrl" jdbcType="VARCHAR" />
+    <result column="mark" property="mark" jdbcType="VARCHAR" />
+    <result column="car_photo" property="carPhoto" jdbcType="VARCHAR" />
+    <result column="car_color" property="carColor" jdbcType="VARCHAR" />
+    <result column="operation_time" property="operationTime" jdbcType="BIGINT" />
+    <result column="grade" property="grade" jdbcType="INTEGER" />
+    <result column="grade_code" property="gradeCode" jdbcType="VARCHAR" />
+    <result column="area" property="area" jdbcType="VARCHAR" />
+    <result column="discharge_standard" property="dischargeStandard" jdbcType="VARCHAR" />
+    <result column="transmission" property="transmission" jdbcType="VARCHAR" />
+    <result column="volume" property="volume" jdbcType="VARCHAR" />
+    <result column="last_time_to_shop" property="lastTimeToShop" jdbcType="VARCHAR" />
+    <result column="number_of_accidents" property="numberOfAccidents" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.pana.generator.entity.MaintainCarInfoWithBLOBs" extends="BaseResultMap" >
+    <result column="report_sketch" property="reportSketch" jdbcType="LONGVARCHAR" />
+    <result column="car_parts_status" property="carPartsStatus" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, car_vin, engine_no, brand, car_type, first_date, odometer_count, report_time, 
+    driving_url, mark, car_photo, car_color, operation_time, grade, grade_code, area, 
+    discharge_standard, transmission, volume, last_time_to_shop, number_of_accidents
+  </sql>
+  <sql id="Blob_Column_List" >
+    report_sketch, car_parts_status
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.pana.generator.entity.MaintainCarInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from maintain_car_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.pana.generator.entity.MaintainCarInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from maintain_car_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from maintain_car_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from maintain_car_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.pana.generator.entity.MaintainCarInfoExample" >
+    delete from maintain_car_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.pana.generator.entity.MaintainCarInfoWithBLOBs" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into maintain_car_info (car_vin, engine_no, brand, 
+      car_type, first_date, odometer_count, 
+      report_time, driving_url, mark, 
+      car_photo, car_color, operation_time, 
+      grade, grade_code, area, 
+      discharge_standard, transmission, volume, 
+      last_time_to_shop, number_of_accidents, report_sketch, 
+      car_parts_status)
+    values (#{carVin,jdbcType=VARCHAR}, #{engineNo,jdbcType=VARCHAR}, #{brand,jdbcType=VARCHAR}, 
+      #{carType,jdbcType=VARCHAR}, #{firstDate,jdbcType=VARCHAR}, #{odometerCount,jdbcType=INTEGER}, 
+      #{reportTime,jdbcType=VARCHAR}, #{drivingUrl,jdbcType=VARCHAR}, #{mark,jdbcType=VARCHAR}, 
+      #{carPhoto,jdbcType=VARCHAR}, #{carColor,jdbcType=VARCHAR}, #{operationTime,jdbcType=BIGINT}, 
+      #{grade,jdbcType=INTEGER}, #{gradeCode,jdbcType=VARCHAR}, #{area,jdbcType=VARCHAR}, 
+      #{dischargeStandard,jdbcType=VARCHAR}, #{transmission,jdbcType=VARCHAR}, #{volume,jdbcType=VARCHAR}, 
+      #{lastTimeToShop,jdbcType=VARCHAR}, #{numberOfAccidents,jdbcType=INTEGER}, #{reportSketch,jdbcType=LONGVARCHAR}, 
+      #{carPartsStatus,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.pana.generator.entity.MaintainCarInfoWithBLOBs" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into maintain_car_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="carVin != null" >
+        car_vin,
+      </if>
+      <if test="engineNo != null" >
+        engine_no,
+      </if>
+      <if test="brand != null" >
+        brand,
+      </if>
+      <if test="carType != null" >
+        car_type,
+      </if>
+      <if test="firstDate != null" >
+        first_date,
+      </if>
+      <if test="odometerCount != null" >
+        odometer_count,
+      </if>
+      <if test="reportTime != null" >
+        report_time,
+      </if>
+      <if test="drivingUrl != null" >
+        driving_url,
+      </if>
+      <if test="mark != null" >
+        mark,
+      </if>
+      <if test="carPhoto != null" >
+        car_photo,
+      </if>
+      <if test="carColor != null" >
+        car_color,
+      </if>
+      <if test="operationTime != null" >
+        operation_time,
+      </if>
+      <if test="grade != null" >
+        grade,
+      </if>
+      <if test="gradeCode != null" >
+        grade_code,
+      </if>
+      <if test="area != null" >
+        area,
+      </if>
+      <if test="dischargeStandard != null" >
+        discharge_standard,
+      </if>
+      <if test="transmission != null" >
+        transmission,
+      </if>
+      <if test="volume != null" >
+        volume,
+      </if>
+      <if test="lastTimeToShop != null" >
+        last_time_to_shop,
+      </if>
+      <if test="numberOfAccidents != null" >
+        number_of_accidents,
+      </if>
+      <if test="reportSketch != null" >
+        report_sketch,
+      </if>
+      <if test="carPartsStatus != null" >
+        car_parts_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="carVin != null" >
+        #{carVin,jdbcType=VARCHAR},
+      </if>
+      <if test="engineNo != null" >
+        #{engineNo,jdbcType=VARCHAR},
+      </if>
+      <if test="brand != null" >
+        #{brand,jdbcType=VARCHAR},
+      </if>
+      <if test="carType != null" >
+        #{carType,jdbcType=VARCHAR},
+      </if>
+      <if test="firstDate != null" >
+        #{firstDate,jdbcType=VARCHAR},
+      </if>
+      <if test="odometerCount != null" >
+        #{odometerCount,jdbcType=INTEGER},
+      </if>
+      <if test="reportTime != null" >
+        #{reportTime,jdbcType=VARCHAR},
+      </if>
+      <if test="drivingUrl != null" >
+        #{drivingUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="mark != null" >
+        #{mark,jdbcType=VARCHAR},
+      </if>
+      <if test="carPhoto != null" >
+        #{carPhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="carColor != null" >
+        #{carColor,jdbcType=VARCHAR},
+      </if>
+      <if test="operationTime != null" >
+        #{operationTime,jdbcType=BIGINT},
+      </if>
+      <if test="grade != null" >
+        #{grade,jdbcType=INTEGER},
+      </if>
+      <if test="gradeCode != null" >
+        #{gradeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null" >
+        #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="dischargeStandard != null" >
+        #{dischargeStandard,jdbcType=VARCHAR},
+      </if>
+      <if test="transmission != null" >
+        #{transmission,jdbcType=VARCHAR},
+      </if>
+      <if test="volume != null" >
+        #{volume,jdbcType=VARCHAR},
+      </if>
+      <if test="lastTimeToShop != null" >
+        #{lastTimeToShop,jdbcType=VARCHAR},
+      </if>
+      <if test="numberOfAccidents != null" >
+        #{numberOfAccidents,jdbcType=INTEGER},
+      </if>
+      <if test="reportSketch != null" >
+        #{reportSketch,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="carPartsStatus != null" >
+        #{carPartsStatus,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.pana.generator.entity.MaintainCarInfoExample" resultType="java.lang.Integer" >
+    select count(*) from maintain_car_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update maintain_car_info
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.carVin != null" >
+        car_vin = #{record.carVin,jdbcType=VARCHAR},
+      </if>
+      <if test="record.engineNo != null" >
+        engine_no = #{record.engineNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.brand != null" >
+        brand = #{record.brand,jdbcType=VARCHAR},
+      </if>
+      <if test="record.carType != null" >
+        car_type = #{record.carType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.firstDate != null" >
+        first_date = #{record.firstDate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.odometerCount != null" >
+        odometer_count = #{record.odometerCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.reportTime != null" >
+        report_time = #{record.reportTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.drivingUrl != null" >
+        driving_url = #{record.drivingUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mark != null" >
+        mark = #{record.mark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.carPhoto != null" >
+        car_photo = #{record.carPhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="record.carColor != null" >
+        car_color = #{record.carColor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operationTime != null" >
+        operation_time = #{record.operationTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.grade != null" >
+        grade = #{record.grade,jdbcType=INTEGER},
+      </if>
+      <if test="record.gradeCode != null" >
+        grade_code = #{record.gradeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.area != null" >
+        area = #{record.area,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dischargeStandard != null" >
+        discharge_standard = #{record.dischargeStandard,jdbcType=VARCHAR},
+      </if>
+      <if test="record.transmission != null" >
+        transmission = #{record.transmission,jdbcType=VARCHAR},
+      </if>
+      <if test="record.volume != null" >
+        volume = #{record.volume,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lastTimeToShop != null" >
+        last_time_to_shop = #{record.lastTimeToShop,jdbcType=VARCHAR},
+      </if>
+      <if test="record.numberOfAccidents != null" >
+        number_of_accidents = #{record.numberOfAccidents,jdbcType=INTEGER},
+      </if>
+      <if test="record.reportSketch != null" >
+        report_sketch = #{record.reportSketch,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.carPartsStatus != null" >
+        car_parts_status = #{record.carPartsStatus,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update maintain_car_info
+    set id = #{record.id,jdbcType=INTEGER},
+      car_vin = #{record.carVin,jdbcType=VARCHAR},
+      engine_no = #{record.engineNo,jdbcType=VARCHAR},
+      brand = #{record.brand,jdbcType=VARCHAR},
+      car_type = #{record.carType,jdbcType=VARCHAR},
+      first_date = #{record.firstDate,jdbcType=VARCHAR},
+      odometer_count = #{record.odometerCount,jdbcType=INTEGER},
+      report_time = #{record.reportTime,jdbcType=VARCHAR},
+      driving_url = #{record.drivingUrl,jdbcType=VARCHAR},
+      mark = #{record.mark,jdbcType=VARCHAR},
+      car_photo = #{record.carPhoto,jdbcType=VARCHAR},
+      car_color = #{record.carColor,jdbcType=VARCHAR},
+      operation_time = #{record.operationTime,jdbcType=BIGINT},
+      grade = #{record.grade,jdbcType=INTEGER},
+      grade_code = #{record.gradeCode,jdbcType=VARCHAR},
+      area = #{record.area,jdbcType=VARCHAR},
+      discharge_standard = #{record.dischargeStandard,jdbcType=VARCHAR},
+      transmission = #{record.transmission,jdbcType=VARCHAR},
+      volume = #{record.volume,jdbcType=VARCHAR},
+      last_time_to_shop = #{record.lastTimeToShop,jdbcType=VARCHAR},
+      number_of_accidents = #{record.numberOfAccidents,jdbcType=INTEGER},
+      report_sketch = #{record.reportSketch,jdbcType=LONGVARCHAR},
+      car_parts_status = #{record.carPartsStatus,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update maintain_car_info
+    set id = #{record.id,jdbcType=INTEGER},
+      car_vin = #{record.carVin,jdbcType=VARCHAR},
+      engine_no = #{record.engineNo,jdbcType=VARCHAR},
+      brand = #{record.brand,jdbcType=VARCHAR},
+      car_type = #{record.carType,jdbcType=VARCHAR},
+      first_date = #{record.firstDate,jdbcType=VARCHAR},
+      odometer_count = #{record.odometerCount,jdbcType=INTEGER},
+      report_time = #{record.reportTime,jdbcType=VARCHAR},
+      driving_url = #{record.drivingUrl,jdbcType=VARCHAR},
+      mark = #{record.mark,jdbcType=VARCHAR},
+      car_photo = #{record.carPhoto,jdbcType=VARCHAR},
+      car_color = #{record.carColor,jdbcType=VARCHAR},
+      operation_time = #{record.operationTime,jdbcType=BIGINT},
+      grade = #{record.grade,jdbcType=INTEGER},
+      grade_code = #{record.gradeCode,jdbcType=VARCHAR},
+      area = #{record.area,jdbcType=VARCHAR},
+      discharge_standard = #{record.dischargeStandard,jdbcType=VARCHAR},
+      transmission = #{record.transmission,jdbcType=VARCHAR},
+      volume = #{record.volume,jdbcType=VARCHAR},
+      last_time_to_shop = #{record.lastTimeToShop,jdbcType=VARCHAR},
+      number_of_accidents = #{record.numberOfAccidents,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pana.generator.entity.MaintainCarInfoWithBLOBs" >
+    update maintain_car_info
+    <set >
+      <if test="carVin != null" >
+        car_vin = #{carVin,jdbcType=VARCHAR},
+      </if>
+      <if test="engineNo != null" >
+        engine_no = #{engineNo,jdbcType=VARCHAR},
+      </if>
+      <if test="brand != null" >
+        brand = #{brand,jdbcType=VARCHAR},
+      </if>
+      <if test="carType != null" >
+        car_type = #{carType,jdbcType=VARCHAR},
+      </if>
+      <if test="firstDate != null" >
+        first_date = #{firstDate,jdbcType=VARCHAR},
+      </if>
+      <if test="odometerCount != null" >
+        odometer_count = #{odometerCount,jdbcType=INTEGER},
+      </if>
+      <if test="reportTime != null" >
+        report_time = #{reportTime,jdbcType=VARCHAR},
+      </if>
+      <if test="drivingUrl != null" >
+        driving_url = #{drivingUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="mark != null" >
+        mark = #{mark,jdbcType=VARCHAR},
+      </if>
+      <if test="carPhoto != null" >
+        car_photo = #{carPhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="carColor != null" >
+        car_color = #{carColor,jdbcType=VARCHAR},
+      </if>
+      <if test="operationTime != null" >
+        operation_time = #{operationTime,jdbcType=BIGINT},
+      </if>
+      <if test="grade != null" >
+        grade = #{grade,jdbcType=INTEGER},
+      </if>
+      <if test="gradeCode != null" >
+        grade_code = #{gradeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null" >
+        area = #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="dischargeStandard != null" >
+        discharge_standard = #{dischargeStandard,jdbcType=VARCHAR},
+      </if>
+      <if test="transmission != null" >
+        transmission = #{transmission,jdbcType=VARCHAR},
+      </if>
+      <if test="volume != null" >
+        volume = #{volume,jdbcType=VARCHAR},
+      </if>
+      <if test="lastTimeToShop != null" >
+        last_time_to_shop = #{lastTimeToShop,jdbcType=VARCHAR},
+      </if>
+      <if test="numberOfAccidents != null" >
+        number_of_accidents = #{numberOfAccidents,jdbcType=INTEGER},
+      </if>
+      <if test="reportSketch != null" >
+        report_sketch = #{reportSketch,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="carPartsStatus != null" >
+        car_parts_status = #{carPartsStatus,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.pana.generator.entity.MaintainCarInfoWithBLOBs" >
+    update maintain_car_info
+    set car_vin = #{carVin,jdbcType=VARCHAR},
+      engine_no = #{engineNo,jdbcType=VARCHAR},
+      brand = #{brand,jdbcType=VARCHAR},
+      car_type = #{carType,jdbcType=VARCHAR},
+      first_date = #{firstDate,jdbcType=VARCHAR},
+      odometer_count = #{odometerCount,jdbcType=INTEGER},
+      report_time = #{reportTime,jdbcType=VARCHAR},
+      driving_url = #{drivingUrl,jdbcType=VARCHAR},
+      mark = #{mark,jdbcType=VARCHAR},
+      car_photo = #{carPhoto,jdbcType=VARCHAR},
+      car_color = #{carColor,jdbcType=VARCHAR},
+      operation_time = #{operationTime,jdbcType=BIGINT},
+      grade = #{grade,jdbcType=INTEGER},
+      grade_code = #{gradeCode,jdbcType=VARCHAR},
+      area = #{area,jdbcType=VARCHAR},
+      discharge_standard = #{dischargeStandard,jdbcType=VARCHAR},
+      transmission = #{transmission,jdbcType=VARCHAR},
+      volume = #{volume,jdbcType=VARCHAR},
+      last_time_to_shop = #{lastTimeToShop,jdbcType=VARCHAR},
+      number_of_accidents = #{numberOfAccidents,jdbcType=INTEGER},
+      report_sketch = #{reportSketch,jdbcType=LONGVARCHAR},
+      car_parts_status = #{carPartsStatus,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pana.generator.entity.MaintainCarInfo" >
+    update maintain_car_info
+    set car_vin = #{carVin,jdbcType=VARCHAR},
+      engine_no = #{engineNo,jdbcType=VARCHAR},
+      brand = #{brand,jdbcType=VARCHAR},
+      car_type = #{carType,jdbcType=VARCHAR},
+      first_date = #{firstDate,jdbcType=VARCHAR},
+      odometer_count = #{odometerCount,jdbcType=INTEGER},
+      report_time = #{reportTime,jdbcType=VARCHAR},
+      driving_url = #{drivingUrl,jdbcType=VARCHAR},
+      mark = #{mark,jdbcType=VARCHAR},
+      car_photo = #{carPhoto,jdbcType=VARCHAR},
+      car_color = #{carColor,jdbcType=VARCHAR},
+      operation_time = #{operationTime,jdbcType=BIGINT},
+      grade = #{grade,jdbcType=INTEGER},
+      grade_code = #{gradeCode,jdbcType=VARCHAR},
+      area = #{area,jdbcType=VARCHAR},
+      discharge_standard = #{dischargeStandard,jdbcType=VARCHAR},
+      transmission = #{transmission,jdbcType=VARCHAR},
+      volume = #{volume,jdbcType=VARCHAR},
+      last_time_to_shop = #{lastTimeToShop,jdbcType=VARCHAR},
+      number_of_accidents = #{numberOfAccidents,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
